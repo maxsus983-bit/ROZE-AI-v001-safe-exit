@@ -3,7 +3,6 @@
 #                TELEGRAM AI ASSISTANT BOT
 # ============================================================
 
-import logging
 import os
 import random
 import re
@@ -13,6 +12,7 @@ from datetime import datetime, timedelta, timezone
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
 import httpx
+from dotenv import load_dotenv
 from telegram import Update
 from telegram.constants import ChatType
 from telegram.ext import (
@@ -23,29 +23,19 @@ from telegram.ext import (
     filters,
 )
 
-# Logging sozlamalari (Oldin yo'qligi uchun xato berayotgan edi)
-logging.basicConfig(
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-    level=logging.INFO
-)
-logger = logging.getLogger(__name__)
+# .env faylini yuklash
+load_dotenv()
 
-# ============================================================
-#                    ASOSIY SOZLAMALAR
-# ============================================================
-
-BOT_TOKEN = "8704121958:AAGQjgT0eR2NZASlCFVzpLhZBT4cO28hNRg"
-OPENROUTER_API_KEY = "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"
+BOT_TOKEN = os.environ.get("8704121958:AAGQjgT0eR2NZASlCFVzpLhZBT4cO28hNRg")
+OPENROUTER_API_KEY = os.environ.get("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")
 
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 MODEL = "openrouter/auto"
-
 DB_FILE = "roze_memory.db"
 
 AUTO_REPLY_PROBABILITY = 0.18
 MAX_CONTEXT_MESSAGES = 30
 
-# Render portini faol tutish uchun soxta veb-server
 class HealthCheckHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         self.send_response(200)
@@ -62,6 +52,7 @@ def run_health_check():
     server.serve_forever()
 
 threading.Thread(target=run_health_check, daemon=True).start()
+
 
 
 # ============================================================
