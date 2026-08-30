@@ -32,10 +32,10 @@ from telegram.ext import (
 #                    ASOSIY SOZLAMALAR
 # ============================================================
 
-BOT_TOKEN = "8898121234:AAF3jhIBCniQk81zSyUp5CbHP3YV472HZIE"
+BOT_TOKEN = "8704121958:AAGQjgT0eR2NZASlCFVzpLhZBT4cO28hNRg"
 
 # OpenRouter User API key:
-OPENROUTER_API_KEY = "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"
+OPENROUTER_API_KEY = "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"
 
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 
